@@ -1,17 +1,18 @@
-import sys, time
+import sys
+import time
 import serial.tools.list_ports
-from common.gui_ui import Ui_MainWindow
-from PySide6 import QtCore
-from PySide6.QtWidgets import QMainWindow, QApplication, QMessageBox
-from PySide6.QtCore import QThread, SIGNAL, Slot
-from common.pdu import Pdu
 from datetime import datetime
+from PySide6.QtWidgets import QMainWindow, QApplication, QMessageBox
+from PySide6.QtCore import QThread, SIGNAL, Slot, Signal
+from common.pdu import Pdu
+from common.gui_ui import Ui_MainWindow
+
 
 class WorkThread(QThread):
     # 工作子线程，与GUI界面分离
-    singal_str = QtCore.Signal(str)
-    singal_int = QtCore.Signal(int)
-    finished = QtCore.Signal()
+    singal_str = Signal(str)
+    singal_int = Signal(int)
+    finished = Signal()
     def __init__(self, parent) -> None:
         super().__init__(parent)
         self.parent = parent
